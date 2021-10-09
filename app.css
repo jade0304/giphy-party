@@ -1,0 +1,27 @@
+h1 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
+    color: azure;
+    text-align: center;
+}
+
+body {
+    background-color: rgb(44, 44, 44);
+}
+
+.btns {
+    font-size: 12px;
+    color: white;
+    background-color: rgb(68, 68, 255);
+    boarder: none;
+    padding: 10px 25px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    transition-duration: 0.4s;
+}
+
+.btns:hover {
+    background-color:  rgb(68, 68, 255);
+    color: white;
+}

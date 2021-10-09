@@ -1,32 +1,29 @@
-const $searchBtn = $('#searchButton');
-const $removeBtn = $('#removeButton');
-const $searchInput = $('#searchInput')
-const gifArea = $('#gifResult')
+const $searchBtn = $("#searchButton");
+const $removeBtn = $("#removeButton");
+const $searchInput = $("#searchInput");
+const $gifArea = $("#gifResult");
 
-$('#searchGif').on('submit', async function(e) {
-    e.preventDefault();
+$("#searchGif").on("submit", async function (e) {
+  e.preventDefault();
 
-let searchTerm = $searchInput.value
-let res = await axios.get('http://api.giphy.com/v1/gifs/search', {params: {q: searchTerm, api_key: "MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym"}});
-    console.log(res.data);
-    const response = res.data
-let randomImg = Math.floor(Math.random() * response.data.length);
+  let searchTerm = $searchInput[0].value;
+  let response = await axios.get("http://api.giphy.com/v1/gifs/search", {
+    params: { q: searchTerm, api_key: "MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym" },
+  });
+  console.log(response.data);
 
-let $newGif = $('gifArea').append('<img class="imgResult">')
-const img = document.querySelector(".imgResult");
-  img.src = response.data[randomImg].images.original.url;
+  const responseArr = response.data.data.length;
+  let randomIdx = Math.floor(Math.random() * responseArr);
+  let randomImgSrc = response.data.data[randomIdx].images.original.url;
+  let $newCol = $("<div>");
+  let $newGif = $(`<img src=${randomImgSrc}>`);
 
-  $searchInput.value = '';
-  
-})
+  $($newCol).append($newGif);
+  $($gifArea).append($newCol);
 
-$('#removeButton').on('click', function(){
-    $gifArea.remove();
-})
+  $searchInput[0].value = "";
+});
 
-
-async function getGif(searchTerm) {
-    const res = await axios.get('http://api.giphy.com/v1/gifs/search', {params: {q: searchTerm, api_key: "MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym"}});
-    console.log(res.data)
-    return res.data
-}                   
+$("#removeButton").on("click", function () {
+  $gifArea.remove();
+});
